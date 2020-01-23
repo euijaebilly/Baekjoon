@@ -13,13 +13,28 @@
 
 
 # 한자리와 두자리는 모두 한수.
+# 계산 상 110까지 한수는 99개 뿐.
 # 입력받은 수 까지 존재하는 모든 수를 검증해야함.
+# input이 110 이상일 경우만 계산.
+# 110 이상일 경우 110 부터 입력 받은 수까지 카운트.
+# 카운트를 문자열 -> 슬라이싱 -> 정수 리스트화
+# 각 자리수를 a,b,c,d라 할때 a-b = b-c = c-d가 성립하면 한수.
+# 리스트로 받을 경우
+# if a <= len(list)-2 and list[a] - list[a+1] == list[a+1]-list[a+2]
 
 
-def com_diff(lists, ind):
-    temp = lists[1] - lists[0]
-    ans = ((ind - 1) * temp) + lists[0]
+def com_diff(lists):
+    count = 0
+    for i in range(1, int(lists) + 1):
+        temp = list(map(int, str(i)))
+        if i < 100:
+            count += 1
+        else:
+            if temp[0] - temp[1] == temp[1] - temp[2]:
+                count += 1
 
-    return ans
+    print(count)
 
 
+num_list = input()
+com_diff(num_list)
